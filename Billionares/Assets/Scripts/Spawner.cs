@@ -24,9 +24,12 @@ public class Spawner : MonoBehaviour
 
     void spawnBillion()
     {
+        
         float x = gameObject.transform.position.x + 1.1f;
         float y = gameObject.transform.position.y - 0.242257f;
+        // Spawn Location for Billions
         Vector2 spawnPos = new Vector2(Random.Range(x,x - 0.2f), Random.Range(y,y - 0.2f));
+        //Spawning logic
         if (Time.time >= spawnTime) 
         {
             spawnTime = Time.time + spawnRate;
@@ -35,11 +38,7 @@ public class Spawner : MonoBehaviour
         }
     }
 
-    //private void OnTriggerEnter2D(Collider2D collision)
-    //{
-    //    collision.gameObject.transform.position = new Vector2(collision.gameObject.transform.position.x + .4f, collision.gameObject.transform.position.y + .4f);
-    //    Debug.Log("Overlapping Billion!");
-    //}
+   
     
        
     
