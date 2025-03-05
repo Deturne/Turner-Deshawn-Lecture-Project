@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 1439672905639718981}
   - component: {fileID: -3682510369196919686}
   - component: {fileID: 8236082277152922137}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Green Billion
-  m_TagString: Untagged
+  m_TagString: Green
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -138,6 +138,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0659edd3f30a444391ae0bb56259904, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  flagTag: Green Flag
+  speed: 1
+  accel: 2
+  maxSpeed: 3
 --- !u!50 &8236082277152922137
 Rigidbody2D:
   serializedVersion: 5

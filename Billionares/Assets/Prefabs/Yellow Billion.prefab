@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 1439672905639718981}
   - component: {fileID: 5159103608081894064}
   - component: {fileID: 3805373195125365944}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Yellow Billion
-  m_TagString: Untagged
+  m_TagString: Yellow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -138,9 +138,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0659edd3f30a444391ae0bb56259904, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  overlapLayerMask:
-    serializedVersion: 2
-    m_Bits: 1
+  flagTag: Yellow Flag
+  speed: 1
+  accel: 2
+  maxSpeed: 3
 --- !u!50 &3805373195125365944
 Rigidbody2D:
   serializedVersion: 5

@@ -20,7 +20,7 @@ public class SpawnFlags : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-
+        
     }
 
     // Update is called once per frame
@@ -55,7 +55,7 @@ public class SpawnFlags : MonoBehaviour
 
             if (flagList.Count > maxFlags)
             {
-                deleteIndex = (deleteIndex + 1) % greenFlags.Count;
+                deleteIndex = (deleteIndex + 1) % flagList.Count;
 
                 GameObject deletedFlag = flagList[deleteIndex];
 
