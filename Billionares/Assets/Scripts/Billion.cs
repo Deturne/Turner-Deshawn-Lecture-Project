@@ -1,9 +1,11 @@
+using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Billion : MonoBehaviour
 {
-    public string flagTag; // Set this to "GreenFlag" or "YellowFlag" in the Inspector
+    public string flagTag; 
     public float speed = 5f;
     public float accel = 2f;
 
@@ -11,10 +13,16 @@ public class Billion : MonoBehaviour
     private Rigidbody2D rb;
     private Transform targetFlag;
 
+    
+
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         targetFlag = null;
+        
+        
+       
     }
 
     void FixedUpdate()
@@ -29,6 +37,8 @@ public class Billion : MonoBehaviour
         {
             SlowDown(); // Stop moving if no flag exists
         }
+
+        
     }
 
     void UpdateTargetFlag()
@@ -79,4 +89,10 @@ public class Billion : MonoBehaviour
     {
         rb.linearVelocity = Vector2.Lerp(rb.linearVelocity, Vector2.zero, 0.3f);
     }
+
+    
+
+    
+
+    
 }

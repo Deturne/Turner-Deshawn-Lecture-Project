@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1439672905639718981}
   - component: {fileID: 5159103608081894064}
   - component: {fileID: 3805373195125365944}
+  - component: {fileID: -7797526834109314307}
   m_Layer: 6
   m_Name: Yellow Billion
   m_TagString: Yellow
@@ -30,8 +31,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -5.0216875, y: 1.5793421, z: 0}
-  m_LocalScale: {x: 1.93, y: 1.93, z: 1.93}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.72, y: 0.72, z: 0.72}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -78,8 +79,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  m_SortingOrder: 1
+  m_Sprite: {fileID: -14895050212934213, guid: 3f8bf6c789ee4a844958ad3ba9cd6311, type: 3}
   m_Color: {r: 1, g: 0.9831909, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -125,7 +126,7 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 0.1
+  m_Radius: 0.25
 --- !u!114 &5159103608081894064
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -169,3 +170,16 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &-7797526834109314307
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8919871341572503289}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05a0390da2b2c274b8870ad0f5b5b6e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageRing: {fileID: 7763427586115619634, guid: 80840b6c7f141724db1e8f4cdb996560, type: 3}
