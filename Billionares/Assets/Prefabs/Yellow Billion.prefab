@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: -7797526834109314307}
   m_Layer: 6
   m_Name: Yellow Billion
-  m_TagString: Yellow
+  m_TagString: Billion
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -143,6 +143,9 @@ MonoBehaviour:
   speed: 1
   accel: 2
   maxSpeed: 3
+  turret: {fileID: 8503141013018557645, guid: 9f0bb00e86c48b144bc16c0c00a63a5d, type: 3}
+  turretInstance: {fileID: 0}
+  teamColor: Yellow
 --- !u!50 &3805373195125365944
 Rigidbody2D:
   serializedVersion: 5
@@ -169,7 +172,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &-7797526834109314307
 MonoBehaviour:
   m_ObjectHideFlags: 0

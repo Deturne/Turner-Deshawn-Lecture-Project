@@ -10,7 +10,7 @@ public class Damage : MonoBehaviour
     private int clickCount = 0; // Track the number of clicks
     private bool isTakingDamage = false; // Prevent multiple damage calls per click
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    
     void Start()
     {
         health = maxHealth;
@@ -21,7 +21,7 @@ public class Damage : MonoBehaviour
         initialScale = transform.localScale; // Save the initial scale
     }
 
-    // Update is called once per frame
+  
     void Update()
     {
         if (Input.GetMouseButtonDown(2))

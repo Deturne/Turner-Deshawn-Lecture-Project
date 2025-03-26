@@ -8,6 +8,7 @@ TagManager:
   - Yellow Flag
   - Green
   - Yellow
+  - Billion
   layers:
   - Default
   - TransparentFX

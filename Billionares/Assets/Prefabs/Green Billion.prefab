@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: -7454246375104871498}
   m_Layer: 6
   m_Name: Green Billion
-  m_TagString: Green
+  m_TagString: Billion
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -143,6 +143,9 @@ MonoBehaviour:
   speed: 1
   accel: 2
   maxSpeed: 3
+  turret: {fileID: 8639809610069366177, guid: 945daa470e6dbba4eb47f4eb97fe4621, type: 3}
+  turretInstance: {fileID: 0}
+  teamColor: Green
 --- !u!50 &8236082277152922137
 Rigidbody2D:
   serializedVersion: 5
@@ -169,7 +172,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &-7454246375104871498
 MonoBehaviour:
   m_ObjectHideFlags: 0
