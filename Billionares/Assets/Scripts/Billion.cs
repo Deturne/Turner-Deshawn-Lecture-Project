@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class Billion : MonoBehaviour
 {
@@ -16,14 +17,22 @@ public class Billion : MonoBehaviour
 
     public GameObject turret;
     public GameObject turretInstance;
-    public string teamColor;
+    public Color teamColor;
+
+    public GameObject beam;
+    public float fireRate = 2.5f; // Time between shots
+    private float lastShotTime = 0f; // Track last shot
+    private bool isShooting = false; // Prevent multiple coroutines
+
+    public bool isOnBase = false; // Flag to indicate if the turret is on a base
+    public float rotationSpeed = 30f; // Rotation speed in degrees per second
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         targetFlag = null;
         turretInstance = Instantiate(turret, transform.position, Quaternion.identity);
-        turretInstance.transform.parent = transform; // Make turret a child of the billion
+        turretInstance.transform.parent = transform;
     }
 
     void FixedUpdate()
@@ -41,31 +50,39 @@ public class Billion : MonoBehaviour
         }
 
         UpdateTurretRotation();
+        Shoot();
     }
 
     void UpdateTargetFlag()
     {
-        GameObject[] flags = GameObject.FindGameObjectsWithTag(flagTag);
-        if (flags.Length == 0)
+        if (flagTag != "")
         {
-            targetFlag = null;
-            return;
-        }
-
-        float shortestDistance = Mathf.Infinity;
-        Transform closestFlag = null;
-
-        foreach (GameObject flag in flags)
-        {
-            float distance = Vector2.Distance(transform.position, flag.transform.position);
-            if (distance < shortestDistance)
+            GameObject[] flags = GameObject.FindGameObjectsWithTag(flagTag);
+            if (flags.Length == 0)
             {
-                shortestDistance = distance;
-                closestFlag = flag.transform;
+                targetFlag = null;
+                return;
             }
-        }
 
-        targetFlag = closestFlag;
+            float shortestDistance = Mathf.Infinity;
+            Transform closestFlag = null;
+
+            foreach (GameObject flag in flags)
+            {
+                float distance = Vector2.Distance(transform.position, flag.transform.position);
+                if (distance < shortestDistance)
+                {
+                    shortestDistance = distance;
+                    closestFlag = flag.transform;
+                }
+            }
+
+            targetFlag = closestFlag;
+        }
+        else
+        {
+            targetFlag = null; // No flag tag set, so no target
+        }
     }
 
     void UpdateTargetEnemy()
@@ -76,7 +93,7 @@ public class Billion : MonoBehaviour
 
         foreach (Billion billion in allBillions)
         {
-            if (billion.teamColor != teamColor && billion != this)
+            if (billion.teamColor != teamColor && billion != this && billion.tag != "Base")
             {
                 enemyBillions.Add(billion);
             }
@@ -114,9 +131,20 @@ public class Billion : MonoBehaviour
             // Calculate direction to target
             Vector2 direction = targetEnemy.position - turretInstance.transform.position;
             // Calculate angle in degrees
-            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg + 90f;
-            // Apply rotation to turret
-            turretInstance.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+            float targetAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg + 90f;
+
+            if (isOnBase)
+            {
+                // Slowly rotate towards the target angle
+                float currentAngle = turretInstance.transform.rotation.eulerAngles.z;
+                float newAngle = Mathf.MoveTowardsAngle(currentAngle, targetAngle, rotationSpeed * Time.deltaTime);
+                turretInstance.transform.rotation = Quaternion.Euler(0, 0, newAngle);
+            }
+            else
+            {
+                // Snap to the target angle
+                turretInstance.transform.rotation = Quaternion.AngleAxis(targetAngle, Vector3.forward);
+            }
         }
         else
         {
@@ -143,6 +171,58 @@ public class Billion : MonoBehaviour
 
     void SlowDown()
     {
-        rb.linearVelocity = Vector2.Lerp(rb.linearVelocity, Vector2.zero, 0.3f);
+        if (rb != null)
+        {
+            rb.linearVelocity = Vector2.Lerp(rb.linearVelocity, Vector2.zero, 0.3f);
+        }
+    }
+
+    void Shoot()
+    {
+        if (targetEnemy == null || isShooting) return; // Prevent multiple shots at once
+
+        if (Time.time >= lastShotTime + fireRate)
+        {
+            lastShotTime = Time.time; // Update last shot time
+            StartCoroutine(ShootCoroutine());
+        }
+    }
+
+    IEnumerator ShootCoroutine()
+    {
+        if (targetEnemy == null) yield break; // Exit if no target
+
+        yield return new WaitForSeconds(1.5f); // Initial delay before shooting
+
+        // Wait until the turret has finished rotating
+        while (!IsTurretRotationComplete())
+        {
+            yield return null; // Wait for the next frame
+        }
+
+        if (targetEnemy != null)
+        {
+            GameObject beamInstance = Instantiate(beam, turretInstance.transform.position, turretInstance.transform.rotation);
+            beamInstance.transform.parent = transform; // Make the beam a child of the Billion instance
+
+            Beam beamScript = beamInstance.GetComponent<Beam>();
+            if (beamScript != null)
+            {
+                Vector2 direction = (targetEnemy.position - beamInstance.transform.position).normalized;
+                beamScript.SetDirection(direction);
+                beamScript.teamColor = teamColor; // Set the team color for the beam
+                
+            }
+        }
+    }
+    bool IsTurretRotationComplete()
+    {
+        if (targetEnemy == null) return true;
+
+        Vector2 direction = targetEnemy.position - turretInstance.transform.position;
+        float targetAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg + 90f;
+        float currentAngle = turretInstance.transform.rotation.eulerAngles.z;
+
+        return Mathf.Abs(Mathf.DeltaAngle(currentAngle, targetAngle)) < 1f; // Adjust the threshold as needed
     }
 }

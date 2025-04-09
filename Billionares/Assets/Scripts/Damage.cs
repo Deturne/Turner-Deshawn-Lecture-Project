@@ -37,7 +37,7 @@ public class Damage : MonoBehaviour
                 {
                     //isTakingDamage = true; // Prevent multiple damage calls
                     clickCount++; // Increment click count
-                    damageable.TakeDamage();
+                    damageable.TakeDamage(30);
                     Debug.Log("Clicked on " + hit.collider.gameObject.name + ", Click number: " + clickCount);
                     Debug.Log("Health: " + damageable.health + ", Scale: " + damageable.transform.localScale);
                 }
@@ -58,9 +58,9 @@ public class Damage : MonoBehaviour
         }
     }
 
-    private void TakeDamage()
+    public void TakeDamage(int damage)
     {
-        health -= 35;
+        health = health - damage;
         float dmgProgress = 1 - ((float)health / maxHealth);
 
         // Ensure the object only shrinks and doesn't grow

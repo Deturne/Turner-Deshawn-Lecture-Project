@@ -9,6 +9,8 @@ TagManager:
   - Green
   - Yellow
   - Billion
+  - Beam
+  - Base
   layers:
   - Default
   - TransparentFX

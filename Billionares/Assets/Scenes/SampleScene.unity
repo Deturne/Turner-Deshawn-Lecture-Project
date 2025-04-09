@@ -131,9 +131,10 @@ GameObject:
   - component: {fileID: 111232868}
   - component: {fileID: 111232867}
   - component: {fileID: 111232866}
+  - component: {fileID: 111232870}
   m_Layer: 0
   m_Name: ufoGreen_0
-  m_TagString: Untagged
+  m_TagString: Base
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -257,6 +258,29 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &111232870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 111232865}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0659edd3f30a444391ae0bb56259904, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flagTag: 
+  speed: 0
+  accel: 0
+  maxSpeed: 0
+  turret: {fileID: 3358952927480106953, guid: 29787b12bcc975e40b99a96ad3a1ee4a, type: 3}
+  turretInstance: {fileID: 0}
+  teamColor: {r: 0, g: 1, b: 0, a: 0}
+  beam: {fileID: 8526813333181273571, guid: 5545ac18f5ae54a4e95994816e9fbdf8, type: 3}
+  fireRate: 2.5
+  isOnBase: 1
+  rotationSpeed: 50
 --- !u!1 &147359855
 GameObject:
   m_ObjectHideFlags: 0
@@ -559,9 +583,10 @@ GameObject:
   - component: {fileID: 384454163}
   - component: {fileID: 384454162}
   - component: {fileID: 384454161}
+  - component: {fileID: 384454165}
   m_Layer: 0
   m_Name: ufoYellow_0
-  m_TagString: Untagged
+  m_TagString: Base
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -685,6 +710,29 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &384454165
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 384454160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0659edd3f30a444391ae0bb56259904, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flagTag: 
+  speed: 0
+  accel: 0
+  maxSpeed: 0
+  turret: {fileID: 3358952927480106953, guid: 29787b12bcc975e40b99a96ad3a1ee4a, type: 3}
+  turretInstance: {fileID: 0}
+  teamColor: {r: 1, g: 1, b: 0, a: 0}
+  beam: {fileID: 3023021390926545589, guid: d963005bf659c64438c6aebd73982dbe, type: 3}
+  fireRate: 2.5
+  isOnBase: 1
+  rotationSpeed: 50
 --- !u!1 &452164282
 GameObject:
   m_ObjectHideFlags: 0

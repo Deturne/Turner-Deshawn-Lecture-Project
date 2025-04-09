@@ -145,7 +145,11 @@ MonoBehaviour:
   maxSpeed: 3
   turret: {fileID: 8639809610069366177, guid: 945daa470e6dbba4eb47f4eb97fe4621, type: 3}
   turretInstance: {fileID: 0}
-  teamColor: Green
+  teamColor: {r: 0, g: 1, b: 0, a: 0}
+  beam: {fileID: 5568273821742106136, guid: 6c07ff1f7ebd545449008015ec4aabee, type: 3}
+  fireRate: 1.5
+  isOnBase: 0
+  rotationSpeed: 30
 --- !u!50 &8236082277152922137
 Rigidbody2D:
   serializedVersion: 5
