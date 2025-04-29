@@ -79,7 +79,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 1751592548230554367, guid: a69c4d4999f263440b4b89d5825202ce, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.20754719, g: 0.20754719, b: 0.1791563, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -104,6 +104,7 @@ MonoBehaviour:
   speed: 10
   damage: 100000
   teamColor: {r: 1, g: 1, b: 0, a: 0}
+  teamReference: {fileID: -6946919380147447163, guid: 0a60a44b627ef564ea2f8ebbb0f3a22e, type: 3}
 --- !u!70 &-712415876298596266
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

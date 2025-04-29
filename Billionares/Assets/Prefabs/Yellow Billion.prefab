@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 5159103608081894064}
   - component: {fileID: 3805373195125365944}
   - component: {fileID: -7797526834109314307}
+  - component: {fileID: -3994257076261047743}
   m_Layer: 6
   m_Name: Yellow Billion
   m_TagString: Billion
@@ -81,7 +82,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: -14895050212934213, guid: 3f8bf6c789ee4a844958ad3ba9cd6311, type: 3}
-  m_Color: {r: 1, g: 0.9831909, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -143,13 +144,19 @@ MonoBehaviour:
   speed: 1
   accel: 2
   maxSpeed: 3
+  targetFlag: {fileID: 0}
+  targetEnemy: {fileID: 0}
   turret: {fileID: 8503141013018557645, guid: 9f0bb00e86c48b144bc16c0c00a63a5d, type: 3}
   turretInstance: {fileID: 0}
-  teamColor: {r: 1, g: 1, b: 0, a: 0}
+  teamName: Yellow
   beam: {fileID: 4797995315800638740, guid: 521dcfbfe151a0c41abab8a6bd97b5a7, type: 3}
   fireRate: 1.5
   isOnBase: 0
   rotationSpeed: 30
+  radialHealthBarPrefab: {fileID: 0}
+  rank: 1
+  health: 0
+  damage: 0
 --- !u!50 &3805373195125365944
 Rigidbody2D:
   serializedVersion: 5
@@ -189,4 +196,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05a0390da2b2c274b8870ad0f5b5b6e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHealth: 100
+  health: 0
   damageRing: {fileID: 7763427586115619634, guid: 80840b6c7f141724db1e8f4cdb996560, type: 3}
+  isOnBase: 0
+  radialHealthBarPrefab: {fileID: 0}
+  radialHealthBar: {fileID: 0}
+  experiencePoints: 0
+  rank: 1
+  radialExperienceBar: {fileID: 0}
+  team: {fileID: 0}
+  spawner: {fileID: 0}
+  rankDisplay: {fileID: 0}
+--- !u!114 &-3994257076261047743
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8919871341572503289}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3d422431bb1bf54a8532bd504ba9770, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  teamName: Yellow
+  teamBase: {fileID: 8889383078903635662, guid: 0a60a44b627ef564ea2f8ebbb0f3a22e, type: 3}
+  billions: []
+  experiencePoints: 0
+  rank: 1
+  xpBar: {fileID: 0}

@@ -12,12 +12,12 @@ public class Billion : MonoBehaviour
     public float maxSpeed = 4;
 
     private Rigidbody2D rb;
-    private Transform targetFlag;
-    private Transform targetEnemy; // For turret targeting
+    public Transform targetFlag;
+    public Transform targetEnemy; // For turret targeting
 
     public GameObject turret;
     public GameObject turretInstance;
-    public Color teamColor;
+    public string teamName; // Use this for team assignment and comparison
 
     public GameObject beam;
     public float fireRate = 2.5f; // Time between shots
@@ -27,15 +27,24 @@ public class Billion : MonoBehaviour
     public bool isOnBase = false; // Flag to indicate if the turret is on a base
     public float rotationSpeed = 30f; // Rotation speed in degrees per second
 
-    void Start()
+    public GameObject radialHealthBarPrefab; // Assign the prefab in the Unity Editor
+    private RadialHealthBar radialHealthBar;
+
+    public int rank = 1; // Rank of the billion
+    public int health;
+    public int damage;
+
+    public void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         targetFlag = null;
         turretInstance = Instantiate(turret, transform.position, Quaternion.identity);
         turretInstance.transform.parent = transform;
+
+        Debug.Log($"{name} assigned to team: {teamName}");
     }
 
-    void FixedUpdate()
+    public void FixedUpdate()
     {
         UpdateTargetFlag(); // Find nearest flag each frame
         UpdateTargetEnemy(); // Find nearest enemy each frame
@@ -85,23 +94,43 @@ public class Billion : MonoBehaviour
         }
     }
 
-    void UpdateTargetEnemy()
+    public void UpdateTargetEnemy()
     {
-        // Find all enemy billions (those with a different teamColor)
-        Billion[] allBillions = Object.FindObjectsOfType<Billion>();
+        // Find all enemy billions (those with a different teamName)
+        Billion[] allBillions = Object.FindObjectsByType<Billion>(FindObjectsInactive.Exclude, FindObjectsSortMode.None);
         List<Billion> enemyBillions = new List<Billion>();
 
         foreach (Billion billion in allBillions)
         {
-            if (billion.teamColor != teamColor && billion != this && billion.tag != "Base")
+            // Exclude friendly billions and SpecialBillions
+            if (billion.teamName != teamName && billion != this)
             {
                 enemyBillions.Add(billion);
             }
+
+            SpecialBillion specialBillion = billion as SpecialBillion;
+            if (specialBillion != null)
+            {
+                if (specialBillion.teamName != teamName && specialBillion != this)
+                {
+                    //Debug.Log($"Excluding friendly SpecialBillion: {specialBillion.name}");
+                    enemyBillions.Add(specialBillion);
+
+                }
+            }
+
+            if(isOnBase && billion.CompareTag("Base"))
+            {
+                //Debug.Log($"Excluding friendly Base: {billion.name}");
+                enemyBillions.Remove(billion);
+            }
+
         }
 
         if (enemyBillions.Count == 0)
         {
             targetEnemy = null;
+            Debug.LogWarning("No enemy billions found.");
             return;
         }
 
@@ -119,10 +148,19 @@ public class Billion : MonoBehaviour
             }
         }
 
-        targetEnemy = closestEnemy;
+        if (closestEnemy != null)
+        {
+            targetEnemy = closestEnemy;
+            Debug.Log($"Target enemy assigned: {targetEnemy.name}");
+        }
+        else
+        {
+            targetEnemy = null;
+            Debug.LogWarning("No closest enemy found.");
+        }
     }
 
-    void UpdateTurretRotation()
+    public void UpdateTurretRotation()
     {
         if (turretInstance == null) return;
 
@@ -155,6 +193,7 @@ public class Billion : MonoBehaviour
 
     void MoveTowardsFlag()
     {
+        if (rb == null || targetFlag == null) return; // Ensure Rigidbody2D and targetFlag are set
         float distance = Vector2.Distance(transform.position, targetFlag.position);
 
         if (distance < 0.2f) // Stop moving when close
@@ -200,7 +239,7 @@ public class Billion : MonoBehaviour
             yield return null; // Wait for the next frame
         }
 
-        if (targetEnemy != null)
+        if (targetEnemy != null && beam != null)
         {
             GameObject beamInstance = Instantiate(beam, turretInstance.transform.position, turretInstance.transform.rotation);
             beamInstance.transform.parent = transform; // Make the beam a child of the Billion instance
@@ -210,11 +249,11 @@ public class Billion : MonoBehaviour
             {
                 Vector2 direction = (targetEnemy.position - beamInstance.transform.position).normalized;
                 beamScript.SetDirection(direction);
-                beamScript.teamColor = teamColor; // Set the team color for the beam
-                
+                beamScript.teamName = teamName; // Set the team name for the beam
             }
         }
     }
+
     bool IsTurretRotationComplete()
     {
         if (targetEnemy == null) return true;

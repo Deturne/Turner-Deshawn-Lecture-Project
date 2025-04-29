@@ -11,6 +11,8 @@ TagManager:
   - Billion
   - Beam
   - Base
+  - Blue Flag
+  - Red Flag
   layers:
   - Default
   - TransparentFX
@@ -20,7 +22,7 @@ TagManager:
   - UI
   - Balls
   - Flags
-  - 
+  - Rocket Blob
   - 
   - 
   - 

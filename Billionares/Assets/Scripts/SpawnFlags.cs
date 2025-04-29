@@ -6,12 +6,18 @@ public class SpawnFlags : MonoBehaviour
     private Vector2 mouse;
     [SerializeField] GameObject green;
     [SerializeField] GameObject yellow;
+    [SerializeField] GameObject red;
+    [SerializeField] GameObject blue;
 
     [SerializeField] List<GameObject> greenFlags;
     [SerializeField] List<GameObject> yellowFlags;
+    [SerializeField] List<GameObject> blueFlags;
+    [SerializeField] List<GameObject> redFlags;
 
     private int greenCount;
     private int yellowCount;
+    private int blueCount;
+    private int redCount;
 
     private int maxFlags = 2;
 
@@ -37,6 +43,15 @@ public class SpawnFlags : MonoBehaviour
 
             spawnFlags(yellow, yellowFlags);
 
+        }
+
+        else if (Input.GetMouseButtonDown(2))
+        {
+            spawnFlags(red, redFlags);
+        }
+        else if (Input.GetMouseButtonDown(3))
+        {
+            spawnFlags(blue, blueFlags);
         }
 
     }

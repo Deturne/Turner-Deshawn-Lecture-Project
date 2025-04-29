@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: -3682510369196919686}
   - component: {fileID: 8236082277152922137}
   - component: {fileID: -7454246375104871498}
+  - component: {fileID: -4229962723635937934}
   m_Layer: 6
   m_Name: Green Billion
   m_TagString: Billion
@@ -143,13 +144,19 @@ MonoBehaviour:
   speed: 1
   accel: 2
   maxSpeed: 3
+  targetFlag: {fileID: 0}
+  targetEnemy: {fileID: 0}
   turret: {fileID: 8639809610069366177, guid: 945daa470e6dbba4eb47f4eb97fe4621, type: 3}
   turretInstance: {fileID: 0}
-  teamColor: {r: 0, g: 1, b: 0, a: 0}
+  teamName: Green
   beam: {fileID: 5568273821742106136, guid: 6c07ff1f7ebd545449008015ec4aabee, type: 3}
   fireRate: 1.5
   isOnBase: 0
   rotationSpeed: 30
+  radialHealthBarPrefab: {fileID: 0}
+  rank: 1
+  health: 0
+  damage: 0
 --- !u!50 &8236082277152922137
 Rigidbody2D:
   serializedVersion: 5
@@ -189,4 +196,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05a0390da2b2c274b8870ad0f5b5b6e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHealth: 100
+  health: 0
   damageRing: {fileID: 7763427586115619634, guid: 80840b6c7f141724db1e8f4cdb996560, type: 3}
+  isOnBase: 0
+  radialHealthBarPrefab: {fileID: 0}
+  radialHealthBar: {fileID: 0}
+  experiencePoints: 0
+  rank: 1
+  radialExperienceBar: {fileID: 0}
+  team: {fileID: -4229962723635937934}
+  spawner: {fileID: 487024288990142094, guid: 7a75a25f37d9ef241b4fc36d2013f972, type: 3}
+  rankDisplay: {fileID: 0}
+--- !u!114 &-4229962723635937934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8919871341572503289}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3d422431bb1bf54a8532bd504ba9770, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  teamName: Green
+  teamBase: {fileID: 487024288990142094, guid: 7a75a25f37d9ef241b4fc36d2013f972, type: 3}
+  billions: []
+  experiencePoints: 0
+  rank: 1
+  xpBar: {fileID: 2329631493564779432, guid: 2cfae3b60a4ed1a42ac6bb42add630a8, type: 3}
