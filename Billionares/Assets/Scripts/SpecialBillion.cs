@@ -16,7 +16,10 @@ public class SpecialBillion : Billion
         // Add a visual indicator above the special billion
         if (visualIndicatorPrefab != null)
         {
-            GameObject indicator = Instantiate(visualIndicatorPrefab, transform.position + Vector3.up * 1.1f, Quaternion.identity, transform);
+            GameObject indicator = Instantiate(visualIndicatorPrefab, transform.position + Vector3.up * 1.1f, Quaternion.identity);
+
+            // Parent the indicator to the SpecialBillion
+            indicator.transform.SetParent(transform);
 
             // Make the indicator translucent
             SpriteRenderer spriteRenderer = indicator.GetComponent<SpriteRenderer>();
@@ -30,6 +33,10 @@ public class SpecialBillion : Billion
             {
                 Debug.LogWarning("No SpriteRenderer found on visualIndicatorPrefab.");
             }
+        }
+        else
+        {
+            Debug.LogWarning("visualIndicatorPrefab is not assigned.");
         }
     }
 

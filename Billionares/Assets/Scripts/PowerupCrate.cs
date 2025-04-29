@@ -43,14 +43,17 @@ public class PowerupCrate : MonoBehaviour
         spawner.CrateCollected();
 
         // Find the spawner for the team that collected the crate
-        Spawner[] allSpawners = FindObjectsOfType<Spawner>();
+        Spawner[] allSpawners = FindObjectsByType<Spawner>(FindObjectsInactive.Exclude, FindObjectsSortMode.None);
         Debug.Log($"Found {allSpawners.Length} spawners in the scene.");
         foreach (Spawner spawner in allSpawners)
         {
             if (spawner.teamReference == teamColor)
             {
-                spawner.ActivateSpecialBillionSpawning(teamColor);
-                break;
+                if (spawner.remainingSpecialSpawns > 0)
+                {
+                    spawner.ActivateSpecialBillionSpawning(teamColor);
+                    break;
+                }
             }
         }
 

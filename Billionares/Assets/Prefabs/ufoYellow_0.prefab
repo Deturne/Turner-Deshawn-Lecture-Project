@@ -109,6 +109,7 @@ MonoBehaviour:
   Billion: {fileID: 8919871341572503289, guid: 2825fb8587ccf504d8c5ceb368e83b99, type: 3}
   specialBillion: {fileID: 8919871341572503289, guid: b8b8416026bfae245808b59bfb9fce38, type: 3}
   specialBillionCount: 5
+  remainingSpecialSpawns: 5
   teamReference: Yellow
   rank: 1
   spawnPoint: {x: -6.0163836, y: -2.8877435}

@@ -9,7 +9,7 @@ public class Spawner : MonoBehaviour
     [SerializeField] GameObject Billion;
     [SerializeField] GameObject specialBillion;
     public int specialBillionCount = 5; // Number of special billions to spawn
-    private int remainingSpecialSpawns = 0;
+    public int remainingSpecialSpawns = 0;
     public string teamReference;
     public int rank = 1;
     public Vector2 spawnPoint; // Spawn point for the base
@@ -36,9 +36,9 @@ public class Spawner : MonoBehaviour
         {
             spawnTime = Time.time + spawnRate;
 
-            if (specialSpawningActive && remainingSpecialSpawns > 0)
+            if (specialSpawningActive)
             {
-                Debug.Log($"Spawning special billion. Remaining special spawns: {remainingSpecialSpawns}");
+                Debug.Log($"Spawning special billion. Team: {teamReference}. Remaining special spawns: {remainingSpecialSpawns}");
                 GameObject billionInstance = Instantiate(specialBillion, spawnPos, Quaternion.identity);
 
                 Billion billionScript = billionInstance.GetComponent<Billion>();
@@ -50,7 +50,7 @@ public class Spawner : MonoBehaviour
                 remainingSpecialSpawns--;
 
                 // If no more special billions are left to spawn, deactivate special spawning
-                if (remainingSpecialSpawns <= 1)
+                if (remainingSpecialSpawns <= 0)
                 {
                     specialSpawningActive = false;
                     Debug.Log("Special billion spawning completed.");

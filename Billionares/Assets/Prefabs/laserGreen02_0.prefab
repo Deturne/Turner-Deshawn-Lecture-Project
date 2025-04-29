@@ -103,8 +103,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   damage: 1000000
-  teamColor: {r: 0, g: 1, b: 0, a: 0}
-  teamReference: {fileID: 3833446254872674426, guid: 7a75a25f37d9ef241b4fc36d2013f972, type: 3}
+  teamName: Green
 --- !u!70 &-5475652655534333522
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

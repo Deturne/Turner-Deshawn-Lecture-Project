@@ -109,6 +109,7 @@ MonoBehaviour:
   Billion: {fileID: 9111004101668561743, guid: 29614643f5ee0884ab7422319e864906, type: 3}
   specialBillion: {fileID: 8919871341572503289, guid: cbd50f7d701e9cf48819a0f574d29513, type: 3}
   specialBillionCount: 5
+  remainingSpecialSpawns: 5
   teamReference: Blue
   rank: 1
   spawnPoint: {x: 5.43, y: 2.8331294}
@@ -169,7 +170,7 @@ MonoBehaviour:
   turret: {fileID: 3358952927480106953, guid: 29787b12bcc975e40b99a96ad3a1ee4a, type: 3}
   turretInstance: {fileID: 0}
   teamName: Blue
-  beam: {fileID: 8526813333181273571, guid: 5545ac18f5ae54a4e95994816e9fbdf8, type: 3}
+  beam: {fileID: 7712538643432872728, guid: 4cf00c008c2f1ae4d8f753e093e459cc, type: 3}
   fireRate: 2.5
   isOnBase: 1
   rotationSpeed: 50
