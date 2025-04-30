@@ -125,6 +125,23 @@ public class RocketBlob : MonoBehaviour
             {
                 Debug.LogWarning($"Object {collider.name} is missing a Damage component!");
             }
+
+            Billion billion = collider.GetComponent<Billion>();
+            if (billion != null)
+            {
+                
+               
+                Rigidbody2D rb = billion.GetComponent<Rigidbody2D>();
+                if (rb != null)
+                {
+                    Vector2 forceDirection = (billion.transform.position - transform.position).normalized;
+                    float forceMagnitude = 0.2f; // Adjust the force magnitude as needed
+                    StartCoroutine(ApplyForceOverTime(rb, forceDirection * forceMagnitude, 0.1f));
+                }
+                
+                
+
+            }
         }
 
         yield return new WaitForSeconds(0.5f);
@@ -213,5 +230,16 @@ public class RocketBlob : MonoBehaviour
         // Draw the explosion radius in the Scene view for debugging
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, explosionRadius);
+    }
+    IEnumerator ApplyForceOverTime(Rigidbody2D rb, Vector2 force, float duration)
+    {
+        float elapsedTime = 0f;
+        while (elapsedTime < duration)
+        {
+            if(rb == null) yield break; // Exit if the Rigidbody2D is destroyed
+            rb.AddForce(force * Time.deltaTime, ForceMode2D.Force);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
     }
 }
