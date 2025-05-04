@@ -140,5 +140,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   damage: 25
-  teamColor: {r: 1, g: 0, b: 0, a: 0}
-  teamReference: {fileID: 8959364116313151589, guid: 239af2c0f6122104a8e5f57fd9ed08aa, type: 3}
+  teamName: Red
+  teamReference: Red
+  lifeTime: 2

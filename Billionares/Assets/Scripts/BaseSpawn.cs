@@ -103,5 +103,26 @@ public class BaseSpawn : MonoBehaviour
 
         }
     }
+    Vector3 GetRandomPositionInGenerationArea(Vector3 generationAreaSize, float groundLevel)
+    {
+        Vector3 randomPosition = new Vector3(
+            UnityEngine.Random.Range(-generationAreaSize.x / 2, generationAreaSize.x / 2),
+            groundLevel,
+            UnityEngine.Random.Range(-generationAreaSize.z / 2, generationAreaSize.z / 2)
+        );
+
+        return randomPosition;
+    }
+    //void SpawnBases()
+    //{
+    //    foreach (GameObject basePrefab in basePrefabs)
+    //    {
+    //        Vector3 randomPosition = GetRandomPositionInGenerationArea(generationAreaSize, absoluteGroundLevel);
+    //        Quaternion randomRotation = Quaternion.Euler(0f, Random.Range(0f, 360f), 0f);
+
+    //        // Instantiate the base prefab at the random position
+    //        Instantiate(basePrefab, randomPosition, randomRotation, transform);
+    //    }
+    //}
 }   
 

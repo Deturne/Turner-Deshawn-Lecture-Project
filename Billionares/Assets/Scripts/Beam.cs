@@ -7,6 +7,7 @@ public class Beam : MonoBehaviour
     public int damage;
     [SerializeField] public string teamName;
     public string teamReference;
+    public float lifeTime = .4f; // Lifetime of the beam in seconds
     public void SetDirection(Vector2 direction)
     {
         this.direction = direction.normalized;
@@ -15,6 +16,12 @@ public class Beam : MonoBehaviour
     void Update()
     {
         transform.position += (Vector3)(direction * speed * Time.deltaTime);
+        lifeTime -= Time.deltaTime;
+
+        if (lifeTime <= 0)
+        {
+            Destroy(gameObject); // Destroy the beam after its lifetime
+        }
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -39,15 +46,12 @@ public class Beam : MonoBehaviour
             damageComponent.TakeDamage(damage, teamReference); 
         }
 
-        if (billion != null && billion.teamName != this.teamName)
-        {
-            //billion.TakeDamage(damage, teamReference); // Pass the team reference to the billion
-            //Debug.Log($"Beam hit billion. Awarding XP to team: {teamReference}");
-        }
+        
             Destroy(gameObject);
 
+        
 
-            // Destroy the beam on collision with any other object
-           
+
+            
     }
 }

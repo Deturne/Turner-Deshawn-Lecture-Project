@@ -9,8 +9,6 @@ public class Damage : MonoBehaviour
 
     public GameObject damageRing;
     private Vector3 initialScale; // Store the initial scale of the object
-    private int clickCount = 0; // Track the number of clicks
-    private bool isTakingDamage = false; // Prevent multiple damage calls per click
     public bool isOnBase;
 
     // Radial health bar
@@ -21,7 +19,7 @@ public class Damage : MonoBehaviour
     [SerializeField] public int rank = 1;
     private int nextRankThreshold = 1; // Initial threshold for rank up
 
-    //public GameObject radialExperienceBarPrefab; // Prefab for the experience bar
+    
     public RadialHealthBar radialExperienceBar;
     public Team team;
 
@@ -96,13 +94,7 @@ public class Damage : MonoBehaviour
 
         if (health <= 0)
         {
-            // Notify the attacking team
-            if (!string.IsNullOrEmpty(attackerTeamName) && attackerTeamName != team.teamName)
-            {
-                Team attackingTeam = FindTeamByName(attackerTeamName);
-                attackingTeam.AwardExperience(1); // Award experience points to the attacking team
-                Debug.Log($"Team {attackingTeam} awarded XP for destroying an object.");
-            }
+            
 
             if (damageRing != null)
             {
@@ -124,10 +116,7 @@ public class Damage : MonoBehaviour
                 Destroy(rankDisplay.gameObject); // Destroy the rank display
             }
 
-            //if (team != null)
-            //{
-            //    team.AwardExperience(1); // Award experience to the team
-            //}
+            
 
 
 
@@ -158,17 +147,5 @@ public class Damage : MonoBehaviour
         }
     }
 
-    private Team FindTeamByName(string teamName)
-    {
-        Team[] allTeams = FindObjectsOfType<Team>();
-        Debug.Log($"Found {allTeams} teams in the scene.");
-        foreach (Team t in allTeams)
-        {
-            if (t.teamName == teamName)
-            {
-                return t;
-            }
-        }
-        return null;
-    }
+    
 }

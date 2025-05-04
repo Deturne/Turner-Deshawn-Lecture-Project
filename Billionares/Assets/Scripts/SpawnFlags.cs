@@ -4,93 +4,69 @@ using UnityEngine;
 public class SpawnFlags : MonoBehaviour
 {
     private Vector2 mouse;
-    [SerializeField] GameObject green;
-    [SerializeField] GameObject yellow;
-    [SerializeField] GameObject red;
-    [SerializeField] GameObject blue;
+    [SerializeField] private int maxFlags = 2;
 
-    [SerializeField] List<GameObject> greenFlags;
-    [SerializeField] List<GameObject> yellowFlags;
-    [SerializeField] List<GameObject> blueFlags;
-    [SerializeField] List<GameObject> redFlags;
+    [Header("Prefabs")]
+    [SerializeField] private GameObject greenPrefab;
+    [SerializeField] private GameObject yellowPrefab;
+    [SerializeField] private GameObject redPrefab;
+    [SerializeField] private GameObject bluePrefab;
 
-    private int greenCount;
-    private int yellowCount;
-    private int blueCount;
-    private int redCount;
-
-    private int maxFlags = 2;
-
-    private int deleteIndex = 0;
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
+    [Header("Spawned Flags")]
+    [SerializeField] private List<GameObject> greenFlags = new List<GameObject>();
+    [SerializeField] private List<GameObject> yellowFlags = new List<GameObject>();
+    [SerializeField] private List<GameObject> redFlags = new List<GameObject>();
+    [SerializeField] private List<GameObject> blueFlags = new List<GameObject>();
+    
     void Update()
     {
         mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        if (Input.GetMouseButtonDown(0))
-        {
-            spawnFlags(green, greenFlags);
 
-        }
-        else if (Input.GetMouseButtonDown(1))
-        {
-
-            spawnFlags(yellow, yellowFlags);
-
-        }
-
-        else if (Input.GetMouseButtonDown(2))
-        {
-            spawnFlags(red, redFlags);
-        }
-        else if (Input.GetMouseButtonDown(3))
-        {
-            spawnFlags(blue, blueFlags);
-        }
-
+        TrySpawnOrMove(0, greenPrefab, greenFlags);
+        TrySpawnOrMove(1, yellowPrefab, yellowFlags);
+        TrySpawnOrMove(2, redPrefab, redFlags);
+        TrySpawnOrMove(3, bluePrefab, blueFlags);
     }
 
-    void spawnFlags(GameObject flag, List<GameObject> flagList)
+    private void TrySpawnOrMove(int mouseButton, GameObject prefab, List<GameObject> list)
     {
-        if (!Draggable.draggingFlag)
+        if (!Input.GetMouseButtonDown(mouseButton)) return;
+
+        // If we're under the cap, spawn a new one
+
+        if(Draggable.draggingFlag) return;
+
+        if (list.Count < maxFlags)
         {
-            GameObject spawned = Instantiate(flag, mouse, Quaternion.identity);
-            flagList.Add(spawned);
+            var go = Instantiate(prefab, mouse, Quaternion.identity);
+            list.Add(go);
+        }
+        else 
+        {
+            // Otherwise just move the closest
+            MoveClosestFlag(mouse, list);
+        }
+    }
 
-            if (deleteIndex >= flagList.Count)
+    private void MoveClosestFlag(Vector2 worldPos, List<GameObject> list)
+    {
+        GameObject closest = null;
+        float minSqrDist = float.MaxValue;
+
+
+        foreach (var f in list)
+        {
+            float sqr = ((Vector2)f.transform.position - worldPos).sqrMagnitude;
+            
+            if (sqr < minSqrDist)
             {
-                deleteIndex = 0;
-            }
 
-            if (flagList.Count > maxFlags)
-            {
-                deleteIndex = (deleteIndex + 1) % flagList.Count;
-
-                GameObject deletedFlag = flagList[deleteIndex];
-
-
-                flagList.RemoveAt(deleteIndex);
-                Destroy(deletedFlag);
-
+                minSqrDist = sqr;
+                closest = f;
             }
         }
 
-
+        if (closest != null)
+            closest.transform.position = worldPos;
     }
 }
-
-            
-
-              
-
-
-
-            
-       
-

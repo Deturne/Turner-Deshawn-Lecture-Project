@@ -243,6 +243,7 @@ public class Billion : MonoBehaviour
         {
             GameObject beamInstance = Instantiate(beam, turretInstance.transform.position, turretInstance.transform.rotation);
             beamInstance.transform.parent = transform; // Make the beam a child of the Billion instance
+            
 
             Beam beamScript = beamInstance.GetComponent<Beam>();
             if (beamScript != null)
@@ -250,6 +251,7 @@ public class Billion : MonoBehaviour
                 Vector2 direction = (targetEnemy.position - beamInstance.transform.position).normalized;
                 beamScript.SetDirection(direction);
                 beamScript.teamName = teamName; // Set the team name for the beam
+
             }
         }
     }

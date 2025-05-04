@@ -237,6 +237,7 @@ public class RocketBlob : MonoBehaviour
         while (elapsedTime < duration)
         {
             if(rb == null) yield break; // Exit if the Rigidbody2D is destroyed
+            if(rb.GetComponentInParent<Billion>().teamName == this.teamName) yield break; // Exit if the parent Billion is destroyed
             rb.AddForce(force * Time.deltaTime, ForceMode2D.Force);
             elapsedTime += Time.deltaTime;
             yield return null;
